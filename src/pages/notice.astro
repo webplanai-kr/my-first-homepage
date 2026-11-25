@@ -77,16 +77,16 @@ const formatDate = (date: string) =>
       </section>
 
       <section class="notice-list" aria-label="공지사항 목록">
-        {#if loadError}
+        {loadError ? (
           <p class="notice-message">
             공지사항을 불러오지 못했습니다. 잠시 후 다시 확인해 주세요.
           </p>
-        {:else if notices.length === 0}
+        ) : notices.length === 0 ? (
           <p class="notice-message">
             등록된 공지사항이 없습니다.
           </p>
-        {:else}
-          {#each notices as notice}
+        ) : (
+          notices.map((notice) => (
             <article class="notice-item">
               <div class="notice-meta">
                 NOTICE
@@ -113,8 +113,8 @@ const formatDate = (date: string) =>
                 자세히 보기 ↗
               </a>
             </article>
-          {/each}
-        {/if}
+          ))
+        )}
       </section>
     </main>
 
